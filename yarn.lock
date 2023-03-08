@@ -5764,10 +5764,10 @@ pkg-dir@^4.2.0:
   dependencies:
     find-up "^4.0.0"
 
-politokens@^1.0.12:
-  version "1.0.12"
-  resolved "https://registry.npmjs.org/politokens/-/politokens-1.0.12.tgz"
-  integrity sha512-2AyY34I359e6hKB1Sv9PpJjPhSfjLOAq0Hp0fjw6s8hEZD6EFuj+8nIsKtIyKonwgru9xr7G2U3tuSUxbgDkQQ==
+politokens@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.npmjs.org/politokens/-/politokens-1.1.2.tgz"
+  integrity sha512-g2suzYBC1RLqydkwPfJPZ2OLK8UA5zDuqEDXxaLcXrVel6iMJxV/Q0YUEkpWaqEQMlwh8csllhlTMdPAaxRD3Q==
 
 posix-character-classes@^0.1.0:
   version "0.1.1"

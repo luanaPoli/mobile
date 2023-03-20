@@ -1,14 +1,16 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet, View } from 'react-native';
 import { getButtonStyle, getTextStyle, getClickedButtonBoxStyle } from './utils';
-import light from 'politokens/build/js/mob/light'
+import light from 'politokens/build/js/mob/light';
+import Icon from '../../images/icons/Icon';
 
 const Button = ({
   onPress = () => {}, 
   children, 
   disabled = false, 
   variant = 'fill', 
-  type = 'primary'
+  type = 'primary',
+  icon = "",
 }) => {
   const [click, setClick] = React.useState(false)
   const [buttonWidth, setButtonWidth] = React.useState(0)
@@ -30,7 +32,10 @@ const Button = ({
           disabled={disabled}
           onPress={onPress}
       >
-        <Text style={textStyle}>{children}</Text>
+        <Text style={textStyle}>
+          <Icon icon={icon} size={20} color={} />
+          {children}
+        </Text>
       </TouchableOpacity>
     </View>
   );
@@ -41,7 +46,7 @@ export default Button
 const buttonBoxStyle = {
   borderWidth: 2,
   borderStyle: 'solid', 
-  borderRadius: 5,
+  borderRadius: light.buttonRadius + 1,
   position: 'relative',
 }
 
@@ -57,7 +62,7 @@ const style = StyleSheet.create({
     position: 'absolute',
     height: '100%',
     zIndex: 2,
-    backgroundColor: '#fff',
+    backgroundColor: light.neutral10,
     opacity: .5,
     borderRadius: light.buttonRadius,
   },

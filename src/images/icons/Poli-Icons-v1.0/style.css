@@ -1,0 +1,93 @@
+@font-face {
+  font-family: 'Poli-Icons';
+  src:  url('fonts/Poli-Icons.eot?96eqri');
+  src:  url('fonts/Poli-Icons.eot?96eqri#iefix') format('embedded-opentype'),
+    url('fonts/Poli-Icons.ttf?96eqri') format('truetype'),
+    url('fonts/Poli-Icons.woff?96eqri') format('woff'),
+    url('fonts/Poli-Icons.svg?96eqri#Poli-Icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="pi-"], [class*=" pi-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'Poli-Icons' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.pi-person_more:before {
+  content: "\e900";
+}
+.pi-person:before {
+  content: "\e901";
+}
+.pi-alert:before {
+  content: "\e902";
+}
+.pi-arrow_bottom:before {
+  content: "\e903";
+}
+.pi-arrow_diagonal:before {
+  content: "\e904";
+}
+.pi-arrow_right:before {
+  content: "\e905";
+}
+.pi-chat_send:before {
+  content: "\e906";
+}
+.pi-chevron_down:before {
+  content: "\e907";
+}
+.pi-chevron_up:before {
+  content: "\e908";
+}
+.pi-eye_closed:before {
+  content: "\e909";
+}
+.pi-eye_open:before {
+  content: "\e90a";
+}
+.pi-heart:before {
+  content: "\e90b";
+}
+.pi-info:before {
+  content: "\e90c";
+}
+.pi-more_horizontal:before {
+  content: "\e90d";
+}
+.pi-more:before {
+  content: "\e90e";
+}
+.pi-more_vertical:before {
+  content: "\e90f";
+}
+.pi-new_tab:before {
+  content: "\e910";
+}
+.pi-share:before {
+  content: "\e911";
+}
+.pi-spin:before {
+  content: "\e912";
+}
+.pi-substract:before {
+  content: "\e913";
+}
+.pi-times:before {
+  content: "\e914";
+}
+.pi-trash:before {
+  content: "\e915";
+}

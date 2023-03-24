@@ -10,6 +10,7 @@ export default function App(){
   return (
     <View  style={{ 
       flex:1,
+      paddingTop: 50,
       justifyContent:'center',
       alignItems:'center',
     }}>
@@ -19,7 +20,7 @@ export default function App(){
           type='primary'
           icon="person_more"
         >Botão Primário</Button>
-        <Button type='primary' variant='fill'>
+        <Button type='primary' variant='fill' icon="person" size='large' >
           Botão Primário
         </Button>
         <Button type='primary' variant='outline'>
@@ -33,7 +34,7 @@ export default function App(){
           disabled
           type='secondary'
         >Botão Secundário</Button>
-        <Button type='secondary' variant='fill'>
+        <Button type='secondary' variant='fill' icon="person">
           Botão Secundário
         </Button>
         <Button type='secondary' variant='outline'>
@@ -47,7 +48,7 @@ export default function App(){
           disabled
           type='danger'
         >Botão Destrutivo</Button>
-        <Button type='danger' variant='fill'>
+        <Button type='danger' variant='fill' icon="person_more" size='small'>
           Botão Destrutivo
         </Button>
         <Button type='danger' variant='outline'>

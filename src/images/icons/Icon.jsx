@@ -9,6 +9,7 @@ const Icon = (props) => (
     SvgComponent={Svg}
     PathComponent={Path}
     iconSet={iconSet}
+    style={{fill: 'red'}}
     {...props}
   />
 );

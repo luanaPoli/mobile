@@ -1,6 +1,11 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet, View } from 'react-native';
-import { getButtonStyle, getTextStyle, getClickedButtonBoxStyle } from './utils';
+import { 
+  getButtonStyle, 
+  getTextStyle, 
+  getClickedButtonBoxStyle, 
+  getIconStyle 
+} from './utils';
 import light from 'politokens/build/js/mob/light';
 import Icon from '../../images/icons/Icon';
 
@@ -10,20 +15,23 @@ const Button = ({
   disabled = false, 
   variant = 'fill', 
   type = 'primary',
-  icon = "",
+  size = 'medium',
+  icon = '',
 }) => {
   const [click, setClick] = React.useState(false)
   const [buttonWidth, setButtonWidth] = React.useState(0)
+  const iconStyle = getIconStyle(type, variant, size)
   const touchableStyle = getButtonStyle(style, type, variant)
-  const textStyle = getTextStyle(style, type, variant)
+  const textStyle = getTextStyle(style, type, variant, size, icon !== '')
   const buttonBoxStyle = [style.buttonBox, click && getClickedButtonBoxStyle(type)]
 
+  console.log(textStyle)
   return (
-    <View 
+    <View
       onLayout={event => setButtonWidth(event.nativeEvent.layout.width)}
       style={buttonBoxStyle}
     >
-      {disabled && <View style={[style.shadow, {width: buttonWidth - 3}]}/>}
+      {disabled && <View style={[style.shadow, {width: buttonWidth }]}/>}
       <TouchableOpacity
           style={touchableStyle}
           onPressIn={() => setClick(true)}
@@ -32,8 +40,8 @@ const Button = ({
           disabled={disabled}
           onPress={onPress}
       >
+        <Icon icon={icon} size={24} style={iconStyle} />
         <Text style={textStyle}>
-          <Icon icon={icon} size={20} color={} />
           {children}
         </Text>
       </TouchableOpacity>
@@ -44,9 +52,9 @@ const Button = ({
 export default Button
 
 const buttonBoxStyle = {
-  borderWidth: 2,
+  borderWidth: light.buttonBorderLarge,
   borderStyle: 'solid', 
-  borderRadius: light.buttonRadius + 1,
+  borderRadius: light.buttonRadius,
   position: 'relative',
 }
 
@@ -67,16 +75,15 @@ const style = StyleSheet.create({
     borderRadius: light.buttonRadius,
   },
   button: {
-    paddingVertical: 16,
-    paddingHorizontal: 18,
     borderRadius: light.buttonRadius,
     borderWidth: 1,
     borderStyle: 'solid', 
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   text: {
     fontFamily: light.buttonLabelFontFamily,
     fontStyle: 'normal',
-    fontWeight: light.buttonLabelFontWeight.toLowerCase(),
-    fontSize: light.buttonLabelFontSize,
+    fontWeight: light.buttonLabelFontWeight,
   },
 })

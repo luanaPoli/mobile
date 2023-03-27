@@ -15,7 +15,6 @@ export default function App(){
       alignItems:'center',
     }}>
         <Button 
-          onPress={signIn}
           disabled
           type='primary'
           icon="person_more"
@@ -30,7 +29,6 @@ export default function App(){
           Botão Primário
         </Button>
         <Button 
-          onPress={signIn}
           disabled
           type='secondary'
         >Botão Secundário</Button>
@@ -44,7 +42,6 @@ export default function App(){
           Botão Secundário
         </Button>
         <Button 
-          onPress={signIn}
           disabled
           type='danger'
         >Botão Destrutivo</Button>

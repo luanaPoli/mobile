@@ -104,9 +104,9 @@ export const getButtonStyle = (style, type, variant) => {
 
 export const getClickedButtonBoxStyle = (type) => {
   const mappedTypes = {
-    primary: {borderColor: light.focusPrimary.color},
-    secondary: {borderColor: light.focusSecondary.color},
-    danger: {borderColor: light.focusFeedbackNegative.color}
+    primary: {borderColor: light.buttonShadowFocus},
+    secondary: {borderColor: light.focusSecondary},
+    danger: {borderColor: light.focusFeedbackNegative}
   }
   return mappedTypes[type] || mappedTypes.primary
 } 

@@ -17,15 +17,25 @@ const Button = ({
   type = 'primary',
   size = 'medium',
   icon = '',
+  loading = false 
 }) => {
   const [click, setClick] = React.useState(false)
   const [buttonWidth, setButtonWidth] = React.useState(0)
+  const [loadingRotate, setLoadingRotate] = React.useState(0)
+
   const iconStyle = getIconStyle(type, variant, size)
   const touchableStyle = getButtonStyle(style, type, variant)
   const textStyle = getTextStyle(style, type, variant, size, icon !== '')
   const buttonBoxStyle = [style.buttonBox, click && getClickedButtonBoxStyle(type)]
 
-  console.log(textStyle)
+  React.useEffect(() => {
+    if (loading) {
+      setTimeout(() => {
+        setLoadingRotate(loadingRotate < 359 ? loadingRotate + 1 : 0)
+      }, .01)
+    }
+  }, [loadingRotate])
+
   return (
     <View
       onLayout={event => setButtonWidth(event.nativeEvent.layout.width)}
@@ -34,16 +44,42 @@ const Button = ({
       {disabled && <View style={[style.shadow, {width: buttonWidth }]}/>}
       <TouchableOpacity
           style={touchableStyle}
-          onPressIn={() => setClick(true)}
+          onPressIn={() => {
+            if (!loading) {
+              setClick(true)
+            }
+          }}
           onPressOut={() => setClick(false)}
           activeOpacity={1}
+          onPress={() => {
+            if (!loading) {
+              onPress();
+            }
+          }}
           disabled={disabled}
-          onPress={onPress}
-      >
-        <Icon icon={icon} size={24} style={iconStyle} />
-        <Text style={textStyle}>
-          {children}
-        </Text>
+          loading={loading}
+        >
+        { 
+          loading ? (
+            <Icon
+              style={{ 
+                transform: [{ rotate: `${loadingRotate}deg` }], 
+                color: iconStyle.color, 
+                margin: iconStyle.margin 
+              }}   
+              icon='spin'
+              size={24}
+            />
+          ) : (
+            <>
+              <Icon icon={icon} size={24} style={iconStyle} />
+              <Text style={textStyle}>
+                {children}
+              </Text>
+            </>
+          )
+        }
+        
       </TouchableOpacity>
     </View>
   );

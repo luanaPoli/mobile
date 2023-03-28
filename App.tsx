@@ -1,12 +1,8 @@
 import React from 'react';
 import { View } from 'react-native';
 import Button from './src/components/buttons/Button';
-import Icon from './src/images/icons/Icon';
 
 export default function App(){
-  const signIn = () => {
-    console.warn('clicado')
-  }
   return (
     <View  style={{ 
       flex:1,
@@ -19,9 +15,24 @@ export default function App(){
           type='primary'
           icon="person_more"
         >Botão Primário</Button>
-        <Button type='primary' variant='fill' icon="person" size='large' >
+        <Button 
+          type='primary' 
+          variant='fill' 
+          icon="person" 
+          size='large'
+        >
           Botão Primário
         </Button>
+        <View style={{flexDirection: 'row'}}>
+          <Button 
+            type='primary' 
+            variant='outline'
+            size='small'
+            loading
+          >
+            Botão Primário
+          </Button>
+        </View>
         <Button type='primary' variant='outline'>
           Botão Primário
         </Button>

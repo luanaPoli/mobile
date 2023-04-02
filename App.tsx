@@ -1,16 +1,51 @@
-import React from 'react';
-import { View } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text , TouchableOpacity, StyleSheet} from 'react-native';
 import Button from './src/components/buttons/Button';
+import Separator from './src/components/separator/Separator';
+import Backdrop from './src/components/backdrop/Backdrop';
+import ButtonFloat from './src/components/buttonFloat/ButtonFloat';
 
 export default function App(){
+  const [backdropVisible, setBackdropVisible] = useState(false);
+
+  const handleOpenBackdrop = () => {
+    setBackdropVisible(true);
+  }
+
+  const handleCloseBackdrop = () => {
+    setBackdropVisible(false);
+  }
+
+  const options = [
+    { icon: 'person', type: 'primary', onPress: () => {console.warn('clicado')} },
+    { icon: 'person_more', type: 'secondary', onPress: () => {console.warn('clicado')}},
+  ];
+
   return (
     <View  style={{ 
       flex:1,
       paddingTop: 50,
       justifyContent:'center',
       alignItems:'center',
+      flexDirection: 'row'
     }}>
-        <Button 
+      {/* <ButtonFloat  icon='person'/>  */}
+      {/* <ButtonFloat icon='person_more' size='medium' type='danger' options={options}/> */}
+  
+      {/* <Text>texto</Text>
+      <Separator width='80%'/> */}
+      <Text>texto</Text>
+      <Separator vertical/>
+      <Text>texto</Text> 
+      {/* <TouchableOpacity style={styles.button} onPress={handleOpenBackdrop}>
+        <Text style={styles.buttonText}>Open Backdrop</Text>
+      </TouchableOpacity>
+      <Backdrop
+        visible={backdropVisible}
+        onClose={handleCloseBackdrop}
+      /> */}
+
+        {/* <Button 
           disabled
           type='primary'
           icon="person_more"
@@ -64,7 +99,24 @@ export default function App(){
         </Button>
         <Button type='danger' variant='ghost'>
           Botão Destrutivo
-        </Button>
+        </Button> */}
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  button: {
+    backgroundColor: '#007aff',
+    padding: 10,
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+  },
+});

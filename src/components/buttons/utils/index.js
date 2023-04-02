@@ -1,6 +1,6 @@
 import light from 'politokens/build/js/mob/light';
 
-export const getTextStyle = (style, type, variant, size, hasIcon) => {
+export const getTextStyle = (style, type, variant, size, hasIcon, hasText) => {
   const mappedTypes = {
     primary: {
       fill: {color: light.primary10},
@@ -18,20 +18,21 @@ export const getTextStyle = (style, type, variant, size, hasIcon) => {
       ghost: {color: light.feedbacksNegative600}
     }
   }
+  console.log(hasText)
   const mappedSize = {
     small: {
       paddingVertical: hasIcon ? 0 : 12,
-      paddingRight: 8,
+      paddingRight: hasText ? 8 : 0,
       paddingLeft: hasIcon ? 0 : 8, 
     },
     medium: {
-      paddingVertical: hasIcon ? 0 :16,
-      paddingRight: 12,
+      paddingVertical: hasIcon ? 0 : 16,
+      paddingRight: hasText ? 12 : 0,
       paddingLeft: hasIcon ? 0 : 12
     },
     large: {
       paddingVertical: hasIcon ? 0 : 18,
-      paddingRight: 16,
+      paddingRight: hasText ? 16 : 0,
       paddingLeft: hasIcon ? 0 : 16
     }
   }

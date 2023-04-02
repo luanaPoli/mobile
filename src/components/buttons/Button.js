@@ -17,16 +17,26 @@ const Button = ({
   type = 'primary',
   size = 'medium',
   icon = '',
-  loading = false 
+  loading = false,
+  style,
+  iconStyle = {},
+  boxStyle = {}
 }) => {
   const [click, setClick] = React.useState(false)
   const [buttonWidth, setButtonWidth] = React.useState(0)
   const [loadingRotate, setLoadingRotate] = React.useState(0)
 
-  const iconStyle = getIconStyle(type, variant, size)
-  const touchableStyle = getButtonStyle(style, type, variant)
-  const textStyle = getTextStyle(style, type, variant, size, icon !== '')
-  const buttonBoxStyle = [style.buttonBox, click && getClickedButtonBoxStyle(type)]
+  const iconStyles = getIconStyle(type, variant, size)
+  const touchableStyle = getButtonStyle(styles, type, variant)
+  const textStyle = getTextStyle(
+    styles, 
+    type, 
+    variant, 
+    size, 
+    icon !== '', 
+    children !== undefined
+  )
+  const buttonBoxStyle = [styles.buttonBox, click && getClickedButtonBoxStyle(type)]
 
   React.useEffect(() => {
     if (loading) {
@@ -39,11 +49,11 @@ const Button = ({
   return (
     <View
       onLayout={event => setButtonWidth(event.nativeEvent.layout.width)}
-      style={buttonBoxStyle}
+      style={[...buttonBoxStyle, boxStyle]}
     >
-      {disabled && <View style={[style.shadow, {width: buttonWidth }]}/>}
+      {disabled && <View style={[styles.shadow, {width: buttonWidth }]}/>}
       <TouchableOpacity
-          style={touchableStyle}
+          style={[...touchableStyle, style]}
           onPressIn={() => {
             if (!loading) {
               setClick(true)
@@ -64,15 +74,19 @@ const Button = ({
             <Icon
               style={{ 
                 transform: [{ rotate: `${loadingRotate}deg` }], 
-                color: iconStyle.color, 
-                margin: iconStyle.margin 
+                color: iconStyles.color, 
+                margin: iconStyles.margin
               }}   
               icon='spin'
               size={24}
             />
           ) : (
             <>
-              <Icon icon={icon} size={24} style={iconStyle} />
+              <Icon 
+                icon={icon} 
+                size={24} 
+                style={{...iconStyles, ...iconStyle}} 
+              />
               <Text style={textStyle}>
                 {children}
               </Text>
@@ -94,7 +108,7 @@ const buttonBoxStyle = {
   position: 'relative',
 }
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   buttonBox: {
     ...buttonBoxStyle,
     borderColor:'transparent',

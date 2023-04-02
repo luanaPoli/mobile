@@ -17,33 +17,83 @@ const Button = ({
   type = 'primary',
   size = 'medium',
   icon = '',
+  loading = false,
+  style,
+  iconStyle = {},
+  boxStyle = {}
 }) => {
   const [click, setClick] = React.useState(false)
   const [buttonWidth, setButtonWidth] = React.useState(0)
-  const iconStyle = getIconStyle(type, variant, size)
-  const touchableStyle = getButtonStyle(style, type, variant)
-  const textStyle = getTextStyle(style, type, variant, size, icon !== '')
-  const buttonBoxStyle = [style.buttonBox, click && getClickedButtonBoxStyle(type)]
+  const [loadingRotate, setLoadingRotate] = React.useState(0)
 
-  console.log(textStyle)
+  const iconStyles = getIconStyle(type, variant, size)
+  const touchableStyle = getButtonStyle(styles, type, variant)
+  const textStyle = getTextStyle(
+    styles, 
+    type, 
+    variant, 
+    size, 
+    icon !== '', 
+    children !== undefined
+  )
+  const buttonBoxStyle = [styles.buttonBox, click && getClickedButtonBoxStyle(type)]
+
+  React.useEffect(() => {
+    if (loading) {
+      setTimeout(() => {
+        setLoadingRotate(loadingRotate < 359 ? loadingRotate + 1 : 0)
+      }, .01)
+    }
+  }, [loadingRotate])
+
   return (
     <View
       onLayout={event => setButtonWidth(event.nativeEvent.layout.width)}
-      style={buttonBoxStyle}
+      style={[...buttonBoxStyle, boxStyle]}
     >
-      {disabled && <View style={[style.shadow, {width: buttonWidth }]}/>}
+      {disabled && <View style={[styles.shadow, {width: buttonWidth }]}/>}
       <TouchableOpacity
-          style={touchableStyle}
-          onPressIn={() => setClick(true)}
+          style={[...touchableStyle, style]}
+          onPressIn={() => {
+            if (!loading) {
+              setClick(true)
+            }
+          }}
           onPressOut={() => setClick(false)}
           activeOpacity={1}
+          onPress={() => {
+            if (!loading) {
+              onPress();
+            }
+          }}
           disabled={disabled}
-          onPress={onPress}
-      >
-        <Icon icon={icon} size={24} style={iconStyle} />
-        <Text style={textStyle}>
-          {children}
-        </Text>
+          loading={loading}
+        >
+        { 
+          loading ? (
+            <Icon
+              style={{ 
+                transform: [{ rotate: `${loadingRotate}deg` }], 
+                color: iconStyles.color, 
+                margin: iconStyles.margin
+              }}   
+              icon='spin'
+              size={24}
+            />
+          ) : (
+            <>
+              <Icon 
+                icon={icon} 
+                size={24} 
+                style={{...iconStyles, ...iconStyle}} 
+              />
+              <Text style={textStyle}>
+                {children}
+              </Text>
+            </>
+          )
+        }
+        
       </TouchableOpacity>
     </View>
   );
@@ -58,7 +108,7 @@ const buttonBoxStyle = {
   position: 'relative',
 }
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   buttonBox: {
     ...buttonBoxStyle,
     borderColor:'transparent',
